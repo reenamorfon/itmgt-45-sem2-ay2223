@@ -41,7 +41,18 @@ def relationship_status(from_member, to_member, social_graph):
     '''
     # Replace `pass` with your code. 
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    pass
+    def relationship_status(from_member, to_member, social_graph):
+        from_follows_to = to_member in social_graph.get(from_member, {})
+        to_follows_from = from_member in social_graph.get(to_member, {})
+        
+        if from_follows_to and to_follows_from:
+            return "friends"
+        elif from_follows_to:
+            return "follower"
+        elif to_follows_from:
+            return "followed by"
+        else:
+            return "no relationship"
 
 
 def tic_tac_toe(board):
@@ -70,7 +81,28 @@ def tic_tac_toe(board):
     '''
     # Replace `pass` with your code. 
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    pass
+    def tic_tac_toe(board):
+        # Check rows
+        for row in board:
+            if len(set(row)) == 1:
+                return row [0]
+            
+        # Check columns
+        for col in range(len(board)):
+            column = [row[col] for row in board]
+            if len(set(column)) == 1:
+                return column [0]
+            
+        # Check diagnosis
+        diagonal1 = [board[i][i] for i in range(len(board))]
+        diagonal2 = [board[i][len(board) - 1 - i] for i in range(len(board))]
+        
+        if len(set(diagonal1)) == 1:
+            return diagonal1[0]
+        if len(set(diagonal2)) == 1:
+            return diagonal2[0]
+        
+        return "NO WINNER"
 
 def eta(first_stop, second_stop, route_map):
     '''ETA. 
@@ -103,4 +135,12 @@ def eta(first_stop, second_stop, route_map):
     '''
     # Replace `pass` with your code. 
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    pass
+    def eta(first_stop, second_stop, route_map):
+        time = 0
+        current_stop = first_stop
+        
+        while current_stop != second_stop:
+            time += route_map[current_stop]["ETA"]
+            current_stop = route_map[current_stop]["next"]
+            
+        return time
